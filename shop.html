@@ -7,8 +7,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"  />
-  <link rel="stylesheet" href="../css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <section id="header">
@@ -16,10 +15,10 @@
     <div>
       <ul id="navbar">
         <li><a  href="index.html">Home</a></li>
-        <li><a  href="shop.html">Shop</a></li>
-        <li><a  href="about.html">About</a></li>
-        <li><a  href="contact.html">Contact us</a></li>
-        <li id="lg-bag"><a class="active" href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+        <li><a class="active" href="shop.html">Shop</a></li>
+        <li><a href="about.html">About </a></li>
+        <li><a href="contact.html">Contact us</a></li>
+        <li id="lg-bag"><a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
         <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
       </ul>
     </div>
@@ -28,49 +27,14 @@
       <i id="bar" class="fas fa-outdent"></i>
     </div>
   </section>
-  <section  id="about-header" >
-    <h2>#Let's_Communicate</h2>
-    <p>LEAVE A MESSAGE. We would love to hear from you!</p>
+  <section id="page-header">
+    <h2>#Stayhome</h2>
+    <p>Save time and money</p>
   </section>
 
-<section id="cart" class="section-p1">
-    <table id="cart-table" width="100%">
-        <thead>
-            <tr>
-                <td>Remove</td>
-                <td>Image</td>
-                <td>Product</td>
-                <td>Price</td>
-                <td>Quantity</td>
-                <td>Subtotal</td>
-            </tr>
-        </thead>
-        <tbody id="cart-body">
-           
-        </tbody>
-    </table>
-</section>
-<section id="cart-add" class="section-p1">
-    <div id="coupon">
-        <h3>Apply Coupon</h3>
-        <div>
-            <input type="text" placeholder="Enter your Coupon">
-            <button class="normal">Apply</button>
-        </div>
-    </div>
-    <div id="subtotal">
-        <h3>Cart Total</h3>
-        <table>
-            <tr>
-                <td>Cart Subtotal</td>
-                <td>Rs.<span id="total-price"></span></td>
-            </tr>
-        </table>
-        <button class="normal"><a style="text-decoration: none; color: white;" href="form.html">Purchase</a></button>
-    </div>
-</section>
-
-
+  <section id="product1" class="section-p1">
+    <div id="product-list" class="pro-container"></div>
+  </section>
   <!-- <section id="newsletter" class="section-p1 section-m1">
     <div class="newstext">
       <h4>Sign up to Newletters</h4>
@@ -241,7 +205,36 @@
       }
     </style>
   </div>
-  <script src="../js/app.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/products.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function renderProducts() {
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'pro';
+        card.onclick = () => window.location.href = `product.html?id=${product.id}`;
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <div class="des">
+            <h5>${product.name}</h5>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h4>Rs.${product.price}</h4>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', renderProducts);
+  </script>
 </body>
 
 </html>
